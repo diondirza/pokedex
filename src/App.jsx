@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
+import Info from './components/Info';
 import List from './components/List';
-import Screen from './components/Screen';
-import {getAllPokemon} from './common/repository';
+import { getAllPokemon, getPokemonDetail } from './common/repository';
 
 import './styles/App.css';
 
 class App extends Component {
   state = {
-    data: null,
+    data: [],
     selectedData: null,
   }
 
@@ -20,8 +20,13 @@ class App extends Component {
   }
 
   handleClick = (data) => {
-    const selectedData = data;
-    this.setState({ ...this.state, selectedData });
+    const id = parseInt(data.url.split('/')[6], 10);
+
+    getPokemonDetail(id).then(response => {
+      const selectedData = response;
+      console.log(selectedData);
+      this.setState({ ...this.state, selectedData });
+    });
   }
 
   render() {
@@ -32,9 +37,7 @@ class App extends Component {
           <h1>Pokedex</h1>
         </div>
         <section className="pokedex-body">
-          <section className="pokedex-detail">
-            <Screen data={selectedData} />
-          </section>
+          <Info data={selectedData} />
           <List data={data} onClick={this.handleClick} />
         </section>
       </div>

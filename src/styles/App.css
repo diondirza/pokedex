@@ -21,14 +21,37 @@
   height: 89vh;
 }
 
-.pokedex-detail {
+.pokedex-info {
   padding: 15px;
+  width: 150px;
+}
+
+.pokedex-detail {
+  background: #f3f3f3;
+}
+
+.pokedex-detail .list {
+  list-style: none;
+  padding: 0;
+}
+
+.pokedex-detail .list .item {
+  padding: 5px 10px
+}
+
+.pokedex-detail .list .item .label {
+  font-weight: 600;
+}
+
+.pokedex-detail .list .item .text {
+
 }
 
 .pokedex-screen {
   border: 3px solid #666;
   border-radius: 15px;
   padding: 3px;
+  text-align: center;
 }
 
 .pokedex-list {
