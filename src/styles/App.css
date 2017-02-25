@@ -27,12 +27,16 @@
 }
 
 .pokedex-detail {
-  background: #f3f3f3;
+  background: #E8EEEE;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 15px;
 }
 
 .pokedex-detail .list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .pokedex-detail .list .item {
@@ -43,11 +47,22 @@
   font-weight: 600;
 }
 
+.pokedex-detail .list .item:first-child{
+  border-bottom: 1px solid #333;
+  margin-bottom: 5px;
+}
+
+.pokedex-detail .list .item:first-child .label {
+  font-size: 1.15em;
+  text-align: center;
+}
+
 .pokedex-detail .list .item .text {
 
 }
 
 .pokedex-screen {
+  background-color: #E8EEEE;
   border: 3px solid #666;
   border-radius: 15px;
   padding: 3px;

@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
+import capitalize from 'lodash.capitalize';
 
 function Detail({ data }) {
   return (
     <div className="pokedex-detail">
       <ul className="list">
         <li className="item">
-          <div className="label">Name</div>
-          <div className="text">{data ? data.name : null}</div>
+          <div className="label">{data ? capitalize(data.name) : 'Name'}</div>
         </li>
         <li className="item">
           <div className="label">Height</div>
@@ -21,7 +21,7 @@ function Detail({ data }) {
           <div className="text">
             {
               data
-              ? data.types.map((o, i)=> <div key={i}>{o.type.name}</div>)
+              ? data.types.map((o, i)=> <div key={i}>{capitalize(o.type.name)}</div>)
               : null
             }
           </div>

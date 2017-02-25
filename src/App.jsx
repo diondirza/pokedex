@@ -11,6 +11,7 @@ class App extends Component {
     data: [],
     selectedData: null,
     page: 0,
+    loading: false,
   }
 
   componentDidMount() {
@@ -24,12 +25,14 @@ class App extends Component {
     const id = parseInt(data.url.split('/')[6], 10);
 
     if (this.clickId) clearTimeout(this.clickId);
+
+    this.setState({ ...this.state, loading: true });
     this.clickId = setTimeout(() => {
       getPokemonDetail(id).then(response => {
         const selectedData = response;
-        this.setState({ ...this.state, selectedData });
+        this.setState({ ...this.state, selectedData, loading: false });
       });
-    }, 500);
+    }, 1000);
   }
 
   handleScroll = (e) => {
@@ -47,14 +50,14 @@ class App extends Component {
   }
 
   render() {
-    const { data, selectedData } = this.state;
+    const { data, selectedData, loading } = this.state;
     return (
       <div className="pokedex">
         <div className="pokedex-header">
           <h1>Pokedex</h1>
         </div>
         <section className="pokedex-body">
-          <Info data={selectedData} />
+          <Info data={selectedData} loading={loading} />
           <List
             data={data}
             onClick={this.handleClick}
