@@ -12,12 +12,12 @@ function ListItem({ data, onClick }) {
 
   return (
     <li onClick={(el) => itemClick(el, data)}>{data.name}</li>
-  )
+  );
 }
 
 ListItem.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-}
+};
 
 export default ListItem;

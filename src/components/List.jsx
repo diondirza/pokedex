@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import ListItem from './ListItem';
 
-
 function List({ data, onClick }) {
   return (
     <section className="pokedex-list">
@@ -13,12 +12,12 @@ function List({ data, onClick }) {
       }
       </ul>
     </section>
-  )
+  );
 }
 
 List.propTypes = {
   data: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired,
-}
+};
 
 export default List;
