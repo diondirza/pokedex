@@ -24,7 +24,6 @@ class App extends Component {
 
     getPokemonDetail(id).then(response => {
       const selectedData = response;
-      console.log(selectedData);
       this.setState({ ...this.state, selectedData });
     });
   }
