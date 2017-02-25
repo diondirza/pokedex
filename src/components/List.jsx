@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import ListItem from './ListItem';
 
-function List({ data, onClick }) {
+function List({ data, onClick, onScroll }) {
   return (
-    <section className="pokedex-list">
+    <section className="pokedex-list" onScroll={onScroll}>
       <ul>
       {
         data ? data.map((obj, idx) =>
@@ -18,6 +18,11 @@ function List({ data, onClick }) {
 List.propTypes = {
   data: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired,
+  onScroll: PropTypes.func,
 };
+
+List.defaultProps = {
+  onScroll: () => {},
+}
 
 export default List;

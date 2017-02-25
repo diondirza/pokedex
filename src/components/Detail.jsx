@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 
 function Detail({ data }) {
-
-
   return (
     <div className="pokedex-detail">
       <ul className="list">
