@@ -2,11 +2,13 @@ import React, { PropTypes } from 'react';
 
 
 function Item({ className, data, onClick }) {
-  function itemClick(el, data) {
-    const selectedEls = document.querySelectorAll('.selected');
+  function itemClick(e, data) {
+    const el = e.target;
+    const parentEl = el.parentNode;
+    const selectedEl = parentEl.querySelector('.selected');
 
-    selectedEls.forEach(el => el.classList.remove('selected'));
-    el.target.classList.add('selected');
+    if (selectedEl) selectedEl.classList.remove('selected');
+    el.classList.add('selected');
     onClick(data);
   }
 
