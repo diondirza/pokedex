@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 
 import Info from './components/Info';
 import List from './components/List';
-import { getAllPokemon, getPokemonDetail } from './common/repository';
+import Filter from './components/Filter';
+import {
+   getAllPokemon,
+   getPokemonDetail,
+   getAllPokemonTypes,
+   getPokemonTypeDetail,
+} from './common/repository';
 
-import './styles/App.css';
+import './styles/app.css';
 
 class App extends Component {
   state = {
+    page: 0,
     data: [],
     selectedData: null,
-    page: 0,
     loading: false,
+    filters: [],
+    selectedFilter: null,
   }
 
   componentDidMount() {
@@ -19,6 +27,10 @@ class App extends Component {
       const data = response.results;
       this.setState({ ...this.state, data });
     });
+    getAllPokemonTypes().then(response => {
+      const filters = response.results;
+      this.setState({ ...this.state, filters });
+    })
   }
 
   handleClick = (data) => {
@@ -26,8 +38,8 @@ class App extends Component {
 
     if (this.clickId) clearTimeout(this.clickId);
 
-    this.setState({ ...this.state, loading: true });
     this.clickId = setTimeout(() => {
+      this.setState({ ...this.state, loading: true });
       getPokemonDetail(id).then(response => {
         const selectedData = response;
         this.setState({ ...this.state, selectedData, loading: false });
@@ -37,9 +49,9 @@ class App extends Component {
 
   handleScroll = (e) => {
     const el = e.target;
-    const bottomPos = el.scrollHeight - window.innerHeight + 56;
+    const bottomPos = el.scrollHeight - el.offsetHeight;
 
-    if (el.scrollTop === bottomPos) {
+    if (!this.state.selectedFilter && el.scrollTop === bottomPos) {
       const page = this.state.page + 1;
 
       getAllPokemon(page).then(response => {
@@ -49,8 +61,28 @@ class App extends Component {
     }
   }
 
+  handleFilter = (data) => {
+    this.setState({ ...this.state, selectedFilter: data });
+    getPokemonTypeDetail(data.name).then(response => {
+      const data = response.pokemon.map(o => o.pokemon);
+      this.setState({ ...this.state, data, selectedData: null });
+    });
+  }
+
+  handleClearFilter = () => {
+    getAllPokemon().then(response => {
+      const data = response.results;
+      this.setState({ ...this.state, data, selectedData: null, selectedFilter: null });
+    });
+  }
+
   render() {
-    const { data, selectedData, loading } = this.state;
+    const {
+      data,
+      selectedData,
+      loading,
+      filters,
+    } = this.state;
     return (
       <div className="pokedex">
         <div className="pokedex-header">
@@ -62,6 +94,11 @@ class App extends Component {
             data={data}
             onClick={this.handleClick}
             onScroll={this.handleScroll}
+          />
+          <Filter
+            data={filters}
+            onClick={this.handleFilter}
+            onClear={this.handleClearFilter}
           />
         </section>
       </div>
