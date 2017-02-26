@@ -10,7 +10,7 @@ import {
    getPokemonTypeDetail,
 } from './common/repository';
 
-import './styles/app.css';
+import './styles/global.css';
 
 class App extends Component {
   state = {
