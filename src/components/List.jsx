@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import ListItem from './ListItem';
+import Item from './Item';
 
 function List({ data, onClick, onScroll }) {
   return (
@@ -7,7 +7,7 @@ function List({ data, onClick, onScroll }) {
       <ul>
       {
         data ? data.map((obj, idx) =>
-          <ListItem key={idx} data={obj} onClick={onClick} />
+          <Item key={idx} data={obj} onClick={onClick} />
         ) : null
       }
       </ul>

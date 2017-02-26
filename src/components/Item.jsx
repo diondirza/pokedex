@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 
-function ListItem({ data, onClick }) {
+function Item({ className, data, onClick }) {
   function itemClick(el, data) {
     const selectedEls = document.querySelectorAll('.selected');
 
@@ -11,13 +11,18 @@ function ListItem({ data, onClick }) {
   }
 
   return (
-    <li onClick={(el) => itemClick(el, data)}>{data.name}</li>
+    <li className={className} onClick={(el) => itemClick(el, data)}>{data.name}</li>
   );
 }
 
-ListItem.propTypes = {
+Item.propTypes = {
+  className: PropTypes.string,
   data: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default ListItem;
+Item.defaultProps = {
+  className: '',
+}
+
+export default Item;
