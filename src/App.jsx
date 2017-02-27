@@ -25,10 +25,12 @@ class App extends Component {
   componentDidMount() {
     const tasks = [ getAllPokemon(), getAllPokemonTypes() ];
 
-    Promise.all(tasks).then(results => {
-      const [ {results: data}, {results: filters} ] = results;
+    Promise.all(tasks).then(responses => {
+      let data = responses[0] ? responses[0].results : [];
+      let filters = responses[1] ? responses[1].results : [];
+
       this.setState({ ...this.state, data, filters });
-    });
+    }).catch((err) => console.error(err));
   }
 
   handleClick = (data) => {
