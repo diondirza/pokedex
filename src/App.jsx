@@ -23,14 +23,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getAllPokemon().then(response => {
-      const data = response.results;
-      this.setState({ ...this.state, data });
+    const tasks = [ getAllPokemon(), getAllPokemonTypes() ];
+
+    Promise.all(tasks).then(results => {
+      const [ {results: data}, {results: filters} ] = results;
+      this.setState({ ...this.state, data, filters });
     });
-    getAllPokemonTypes().then(response => {
-      const filters = response.results;
-      this.setState({ ...this.state, filters });
-    })
   }
 
   handleClick = (data) => {
@@ -42,7 +40,7 @@ class App extends Component {
       this.setState({ ...this.state, loading: true });
       getPokemonDetail(id).then(response => {
         const selectedData = response;
-        this.setState({ ...this.state, selectedData, loading: false });
+        this.setState({ selectedData, loading: false });
       });
     }, 1000);
   }
