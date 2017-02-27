@@ -1,6 +1,6 @@
 # Pokedex App
 
-Simple Pokedex built by using React, and bootstrap using CRA.
+Simple Pokedex built by using React, and bootstraped by using [create-react-app](https://github.com/facebookincubator/create-react-app).
 
 ### Development
 
